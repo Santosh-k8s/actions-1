@@ -8,17 +8,38 @@ jobs:
         steps: 
             - name: install cowsay pkg
               run: sudo apt-get install cowsay -y
+
             - name: generate ascii artwork
               run: cowsay -f dragon "SANTOSH" >> dragon.txt
+
+            - name: upload dragon file to artifact
+              uses: actions/upload-artifact@v4
+              with: 
+                 name: dragon-file
+                 path: dragon.txt                  
+                
     second-job:
+        needs:  [first-job]
         runs-on: ubuntu-latest
         steps:
-             - name: check dragon file exist 
-               run: grep -i SANTOSH dragon.txt
+            - name: download dragon file
+              uses: actions/download-artifact@v4
+              with:
+                name: dragon-file
+
+            - name: check dragon file exist 
+              run: grep -i SANTOSH dragon.txt
     third-job:
+        needs: second-job
         runs-on: ubuntu-latest
         steps:
+            - name: download dragon file
+              uses: actions/download-artifact@v4
+              with:
+                name: dragon-file
+
             - name: read dragon art file
               run: cat dragon.txt
+              
             - name: read all files 
               run: ls -alrt
