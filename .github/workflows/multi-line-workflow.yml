@@ -8,8 +8,11 @@ jobs:
                   steps: 
                       - name: checkout
                         uses: actions/checkout@v4
+
+                      - name: install cowsay pkg
+                        run: sudo apt-get install cowsay -y
                       
-                      - name: run multiple commands
+                      - name: run multiple commands to check README file of repo
                         run: |
                            echo "list and read README file"
                            ls -alrt
@@ -17,3 +20,12 @@ jobs:
 
                       - name: generate ascii artwork
                         run: cowsay -f dragon "SANTOSH" >> dragon.txt
+
+                      - name: check dragon file exist 
+                        run: grep -i SANTOSH dragon.txt
+
+                      - name: read dragon art file
+                        run: cat dragon.txt
+
+                      - name: read all files 
+                        run: ls
