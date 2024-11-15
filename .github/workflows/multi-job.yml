@@ -1,0 +1,24 @@
+name: run multi job work flow
+
+on: push
+
+jobs:
+    first-job:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: install cowsay pkg
+              run: sudo apt-get install cowsay -y
+            - name: generate ascii artwork
+              run: cowsay -f dragon "SANTOSH" >> dragon.txt
+    second-job:
+        runs-on: ubuntu-latest
+        steps:
+             - name: check dragon file exist 
+               run: grep -i SANTOSH dragon.txt
+    third-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: read dragon art file
+              run: cat dragon.txt
+            - name: read all files 
+              run: ls -alrt
