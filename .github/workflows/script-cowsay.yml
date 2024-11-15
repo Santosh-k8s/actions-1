@@ -13,4 +13,4 @@ jobs:
                         run: |
                            chmod +x cowsay-script.sh
                            sh cowsay-script.sh
-                           ls
+                           ls -alrt
