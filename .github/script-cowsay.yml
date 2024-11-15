@@ -1,0 +1,16 @@
+name: script execution
+
+on: push
+
+jobs:
+    script-job:
+                  runs-on: ubuntu-latest
+                  steps: 
+                      - name: checkout
+                        uses: actions/checkout@v4
+
+                      - name: run cowsay script artfile
+                        run: |
+                           chmod +x cowsay-script.sh
+                           sh cowsay-script.sh
+                           ls
