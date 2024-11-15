@@ -1,0 +1,16 @@
+name: run multi line work flow
+
+on: push
+
+jobs:
+    multi-line-job:
+                  runs-on: ubuntu-latest
+                  steps: 
+                      - name: checkout
+                        uses: actions/checkout@v4
+                      
+                      - name: run multiple commands
+                        run: |
+                           echo "list and read README file"
+                           ls -alrt
+                           cat README.md
